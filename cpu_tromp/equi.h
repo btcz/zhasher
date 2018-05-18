@@ -26,11 +26,11 @@ typedef unsigned char uchar;
 // algorithm parameters, prefixed with W to reduce include file conflicts
 
 #ifndef WN
-#define WN	200
+#define WN	144
 #endif
 
 #ifndef WK
-#define WK	9
+#define WK	5
 #endif
 
 #define PARAMETER_N WN
@@ -50,7 +50,7 @@ typedef u32 proof[PROOFSIZE];
 void setheader(blake2b_state *ctx, const char *header, const u32 headerLen, const char* nce, const u32 nonceLen) {
   uint32_t le_N = WN;
   uint32_t le_K = WK;
-  uchar personal[] = "ZcashPoW01230123";
+  uchar personal[] = "BitcoinZ";
   memcpy(personal+8,  &le_N, 4);
   memcpy(personal+12, &le_K, 4);
   blake2b_param P[1];
@@ -132,4 +132,3 @@ int verify(u32 indices[PROOFSIZE], const char *header, const u32 headerlen, cons
   uchar hash[WN/8];
   return verifyrec(&ctx, indices, hash, WK);
 }
-

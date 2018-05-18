@@ -76,8 +76,8 @@ SOFTWARE.
 #include "eqcuda.hpp"
 #include "sm_32_intrinsics.h"
 
-#define WN	200
-#define WK	9
+#define WN	144
+#define WK	5
 #define NDIGITS		(WK+1)
 #define DIGITBITS	(WN/(NDIGITS))
 #define PROOFSIZE (1<<WK)
@@ -197,7 +197,7 @@ __device__ __forceinline__ uint4 operator^ (uint4 a, uint4 b)
 	return make_uint4(a.x ^ b.x, a.y ^ b.y, a.z ^ b.z, a.w ^ b.w);
 }
 
-__device__ __forceinline__ uint2 ROR2(const uint2 a, const int offset) 
+__device__ __forceinline__ uint2 ROR2(const uint2 a, const int offset)
 {
 	uint2 result;
 	{
@@ -207,7 +207,7 @@ __device__ __forceinline__ uint2 ROR2(const uint2 a, const int offset)
 	return result;
 }
 
-__device__ __forceinline__ uint2 SWAPUINT2(uint2 value) 
+__device__ __forceinline__ uint2 SWAPUINT2(uint2 value)
 {
 	return make_uint2(value.y, value.x);
 }
@@ -228,7 +228,7 @@ __device__ __forceinline__ uint2 ROR16(const uint2 a)
 	return result;
 }
 
-__device__ __forceinline__ void G2(u64 & a, u64 & b, u64 & c, u64 & d, u64 x, u64 y) 
+__device__ __forceinline__ void G2(u64 & a, u64 & b, u64 & c, u64 & d, u64 x, u64 y)
 {
 	a = a + b + x;
 	((uint2*)&d)[0] = SWAPUINT2(((uint2*)&d)[0] ^ ((uint2*)&a)[0]);
@@ -512,12 +512,12 @@ __global__ void digit_first(equi<RB, SM>* eq, u32 nonce)
 
 /*
   Functions digit_1 to digit_8 works by the same principle;
-  Each thread does 2-3 slot loads (loads are coalesced). 
+  Each thread does 2-3 slot loads (loads are coalesced).
   Xorwork of slots is loaded into shared memory and is kept in registers (except for digit_1).
-  At the same time, restbits (8 or 9 bits) in xorwork are used for collisions. 
+  At the same time, restbits (8 or 9 bits) in xorwork are used for collisions.
   Restbits determine position in ht.
   Following next is pair creation. First one (or two) pairs' xorworks are put into global memory
-  as soon as possible, the rest pairs are saved in shared memory (one u32 per pair - 16 bit indices). 
+  as soon as possible, the rest pairs are saved in shared memory (one u32 per pair - 16 bit indices).
   In most cases, all threads have one (or two) pairs so with this trick, we offload memory writes a bit in last step.
   In last step we save xorwork of pairs in memory.
 */
@@ -1948,7 +1948,7 @@ __host__ void setheader(blake2b_state *ctx, const char *header, const u32 header
 {
 	uint32_t le_N = WN;
 	uint32_t le_K = WK;
-	uchar personal[] = "ZcashPoW01230123";
+	uchar personal[] = "BitcoinZ";
 	memcpy(personal + 8, &le_N, 4);
 	memcpy(personal + 12, &le_K, 4);
 	blake2b_param P[1];
@@ -2112,7 +2112,7 @@ __host__ void eq_cuda_context<RB, SM, SSM, THREADS, PACKER>::solve(const char *t
 		for (u32 i = 0; i < PROOFSIZE; i++) {
 			index_vector[i] = solutions->sols[s][i];
 		}
-		
+
 		solutionf(index_vector, DIGITBITS, nullptr);
 	}
 
