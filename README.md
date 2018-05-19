@@ -24,6 +24,11 @@ Open **nheqminer.sln** under **nheqminer/nheqminer.sln** and build. You will hav
 If you don't wan't to build with all solvlers you can go to **nheqminer Properties > C/C++ > Preprocessor > Preprocessor Definitions** and remove the solver you don't need.
 
 ## Linux
+As root, you may need to pdate symlinks to older version of GCC. eg using cuda tools 9.1 on Ubuntu 18.04
+update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 100
+update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 100
+update-alternatives --install /usr/bin/cpp cpp-bin /usr/bin/cpp-6 100
+
 Work in progress.
 Working solvers CPU_TROMP, CPU_XENONCAT, CUDA_TROMP, CUDA_DJEZO
 
