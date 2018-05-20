@@ -3,9 +3,13 @@
 #include "cuda.h"
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
-//#include "device_functions_decls.h" not required for cuda tools >=9.1
 #include "../cpu_tromp/blake2/blake2.h"
 #include "cuda_djezo.hpp"
+
+#if CUDART_VERSION < 9000
+#include "device_functions_decls.h"
+#endif
+
 
 #ifdef WIN32
 #define _SNPRINTF _snprintf
