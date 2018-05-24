@@ -30,10 +30,6 @@ typedef uint16_t u16;
 typedef uint64_t u64;
 
 #ifdef ATOMIC
-#define ATOMIC
-#endif
-
-#ifdef ATOMIC
 #include <atomic>
 typedef std::atomic<u32> au32;
 #else
