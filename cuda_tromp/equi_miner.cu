@@ -1,7 +1,7 @@
 // Equihash CUDA solver
 // Copyright (c) 2016 John Tromp
 
-#include "equi.h"
+#include "../cpu_tromp/equi.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -14,14 +14,6 @@
 
 typedef uint16_t u16;
 typedef uint64_t u64;
-
-#define checkCudaErrors(ans) { gpuAssert((ans), __FILE__, __LINE__); }
-inline void gpuAssert(cudaError_t code, const char *file, int line, bool abort=true) {
-  if (code != cudaSuccess) {
-    fprintf(stderr,"GPUassert: %s %s %d\n", cudaGetErrorString(code), file, line);
-    if (abort) exit(code);
-  }
-}
 
 #ifndef RESTBITS
 #define RESTBITS	4
@@ -189,8 +181,9 @@ struct equi {
   equi(const u32 n_threads) {
     nthreads = n_threads;
   }
-  void setheadernonce(const char *headernonce, const u32 len) {
-    setheader(&blake_ctx, headernonce);
+  void setheadernonce(const char *header, const u32 len, const char* nonce, const u32 nlen) {
+    setheader(&blake_ctx, header, len, nonce, nlen);
+    checkCudaErrors(cudaMemset(nslots, 0, NBUCKETS * sizeof(u32)));
     nsols = 0;
   }
   __device__ u32 getnslots0(const u32 bid) {
@@ -934,7 +927,7 @@ void eq_cuda_context::solve(const char *tequihash_header,
 {
 	checkCudaErrors(cudaSetDevice(device_id));
 
-	eq->setheadernonce(nonce, nonce_len);
+	eq->setheadernonce(tequihash_header, tequihash_header_len, nonce, nonce_len);
 	checkCudaErrors(cudaMemcpy(device_eq, eq, sizeof(equi), cudaMemcpyHostToDevice));
 
 	digitH << <totalblocks, threadsperblock >> >(device_eq);
