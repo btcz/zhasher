@@ -350,7 +350,7 @@ ZcashMiner::~ZcashMiner()
 
 std::string ZcashMiner::userAgent()
 {
-	return "nheqminer/" STANDALONE_MINER_VERSION;
+	return "zhasher/" STANDALONE_MINER_VERSION;
 }
 
 

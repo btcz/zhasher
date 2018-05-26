@@ -1,6 +1,9 @@
 // Equihash CUDA solver
 // Copyright (c) 2016 John Tromp
 
+#define htole32(x) (x)
+#define HAVE_DECL_HTOLE32 1
+
 #include "../cpu_tromp/equi.h"
 #include <stdio.h>
 #include <stdlib.h>

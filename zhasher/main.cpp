@@ -242,16 +242,14 @@ int main(int argc, char* argv[])
 #endif
 
 	std::cout << std::endl;
-	std::cout << "\t==================== www.nicehash.com ====================" << std::endl;
-	std::cout << "\t\tEquihash CPU&GPU Miner for NiceHash v" STANDALONE_MINER_VERSION << std::endl;
-	std::cout << "\tThanks to Zcash developers for providing base of the code." << std::endl;
-	std::cout << "\t    Special thanks to tromp, xenoncat and djeZo for providing "<< std::endl;
-	std::cout << "\t      optimized CPU and CUDA equihash solvers." << std::endl;
-	std::cout << "\t==================== www.nicehash.com ====================" << std::endl;
+	std::cout << "\t======================= btcz.rocks =======================" << std::endl;
+	std::cout << "\t\tZhash CPU&GPU Miner for BitcoinZ v" STANDALONE_MINER_VERSION << std::endl;
+	std::cout << "\tSpecial thanks to tromp for providing CPU and CUDA solvers" << std::endl;
+	std::cout << "\t======================= btcz.rocks =======================" << std::endl;
 	std::cout << std::endl;
 
-	std::string location = "equihash.eu.nicehash.com:3357";
-	std::string user = "34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG";
+	std::string location = "mine.equipool.1ds.us:50120";
+	std::string user = "t1fHHnAXxoPWGY77sG5Zw2sFfGUTpW6BcSZ.zhasher";
 	std::string password = "x";
 	int num_threads = 0;
 	bool benchmark = false;
@@ -268,6 +266,12 @@ int main(int argc, char* argv[])
 
 	for (int i = 1; i < argc; ++i)
 	{
+		std::string arg = argv[i];
+		if ((arg == "-h") || (arg == "--help") || (arg == "-help")) {
+			print_help();
+			return 0;
+		}
+
 		if (argv[i][0] != '-') continue;
 
 		switch (argv[i][1])
@@ -389,9 +393,6 @@ int main(int argc, char* argv[])
 		case 't':
 			num_threads = atoi(argv[++i]);
 			break;
-		case 'h':
-			print_help();
-			return 0;
 		case 'b':
 			benchmark = true;
 			if (argv[i + 1] && argv[i + 1][0] != '-')

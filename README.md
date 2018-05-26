@@ -5,15 +5,15 @@
 
 ## Windows:
 
-Windows builds made by us are available here: https://github.com/nicehash/nheqminer/releases
+Windows builds made by us are available here: https://github.com/nicehash/zhasher/releases
 
 Download and install:
-- [CUDA SDK](https://developer.nvidia.com/cuda-downloads) (if not needed remove **USE_CUDA_TROMP** and **USE_CUDA_DJEZO** from **nheqminer** Preprocessor definitions under Properties > C/C++ > Preprocessor)
+- [CUDA SDK](https://developer.nvidia.com/cuda-downloads) (if not needed remove **USE_CUDA_TROMP** and **USE_CUDA_DJEZO** from **zhasher** Preprocessor definitions under Properties > C/C++ > Preprocessor)
 - Visual Studio 2013 Community: https://www.visualstudio.com/en-us/news/releasenotes/vs2013-community-vs
 - [Visual Studio Update 5](https://www.microsoft.com/en-us/download/details.aspx?id=48129) installed
 - 64 bit version only
 
-Open **nheqminer.sln** under **nheqminer/nheqminer.sln** and build. You will have to build ReleaseSSE2 cpu_tromp project first, then Release7.5 cuda_tromp project, then select Release and build all.
+Open **zhasher.sln** under **zhasher/zhasher.sln** and build. You will have to build ReleaseSSE2 cpu_tromp project first, then Release7.5 cuda_tromp project, then select Release and build all.
 
 ### Enabled solvers: 
   - USE_CPU_TROMP
@@ -21,7 +21,7 @@ Open **nheqminer.sln** under **nheqminer/nheqminer.sln** and build. You will hav
   - USE_CUDA_TROMP
   - USE_CUDA_DJEZO
 
-If you don't wan't to build with all solvlers you can go to **nheqminer Properties > C/C++ > Preprocessor > Preprocessor Definitions** and remove the solver you don't need.
+If you don't wan't to build with all solvlers you can go to **zhasher Properties > C/C++ > Preprocessor > Preprocessor Definitions** and remove the solver you don't need.
 
 ## Linux
   - As root, you may need to update symlinks to older version of GCC. eg using cuda tools 9.1 on Ubuntu 18.04
@@ -41,21 +41,21 @@ Working solvers CPU_TROMP, CPU_XENONCAT, CUDA_TROMP, CUDA_DJEZO
 
   - Use Boost 1.62+ (if it is not available from the repos you will have to download and build it yourself)
   - CMake v3.5 (if it is not available from the repos you will have to download and build it yourself)
-  - Currently support only static building (CPU_XENONCAT, CUDA_DJEZO are enabled by default, check **CMakeLists.txt** in **nheqminer** root folder)
+  - Currently support only static building (CPU_XENONCAT, CUDA_DJEZO are enabled by default, check **CMakeLists.txt** in **zhasher** root folder)
   - If not on Ubuntu make sure you have **fasm** installed and accessible in **PATH**
   - After that open the terminal and run the following commands:
-    - `git clone https://github.com/nicehash/nheqminer.git`
+    - `git clone https://github.com/nicehash/zhasher.git`
     - Generating asm object file:
       - **On Ubuntu**:
-        - `cd nheqminer/cpu_xenoncat/asm_linux/`
+        - `cd zhasher/cpu_xenoncat/asm_linux/`
         - `sh assemble.sh`
       - **bundeled fasm not compatible**:
-        - delete/replace (inside **nheqminer/cpu_xenoncat/asm_linux/** directory) with fasm binary compatible with your distro
-        - `cd nheqminer/cpu_xenoncat/asm_linux/`
+        - delete/replace (inside **zhasher/cpu_xenoncat/asm_linux/** directory) with fasm binary compatible with your distro
+        - `cd zhasher/cpu_xenoncat/asm_linux/`
         - `sh assemble.sh`
     - `cd ../../../`
     - `mkdir build && cd build`
-    - `cmake ../nheqminer`
+    - `cmake ../zhasher`
     - `make -j $(nproc)`
     
 # Run instructions:
@@ -83,18 +83,18 @@ If run without parameters, miner will start mining with 75% of available logical
 
 Example to run benchmark on your CPU:
 
-        nheqminer -b
+        zhasher -b
         
 Example to mine on your CPU with your own BTC address and worker1 on NiceHash USA server:
 
-        nheqminer -l equihash.usa.nicehash.com:3357 -u YOUR_BTC_ADDRESS_HERE.worker1
+        zhasher -l equihash.usa.nicehash.com:3357 -u YOUR_BTC_ADDRESS_HERE.worker1
 
 Example to mine on your CPU with your own BTC address and worker1 on EU server, using 6 threads:
 
-        nheqminer -l equihash.eu.nicehash.com:3357 -u YOUR_BTC_ADDRESS_HERE.worker1 -t 6
+        zhasher -l equihash.eu.nicehash.com:3357 -u YOUR_BTC_ADDRESS_HERE.worker1 -t 6
 
 <i>Note: if you have a 4-core CPU with hyper threading enabled (total 8 threads) it is best to run with only 6 threads (experimental benchmarks shows that best results are achieved with 75% threads utilized)</i>
 
 Example to mine on your CPU as well on your CUDA GPUs with your own BTC address and worker1 on EU server, using 6 CPU threads and 2 CUDA GPUs:
 
-        nheqminer -l equihash.eu.nicehash.com:3357 -u YOUR_BTC_ADDRESS_HERE.worker1 -t 6 -cd 0 1
+        zhasher -l equihash.eu.nicehash.com:3357 -u YOUR_BTC_ADDRESS_HERE.worker1 -t 6 -cd 0 1

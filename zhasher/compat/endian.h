@@ -11,7 +11,7 @@
 
 #include <stdint.h>
 
-#include "../nheqminer/compat/byteswap.h"
+#include "../zhasher/compat/byteswap.h"
 
 #if defined(HAVE_ENDIAN_H)
 #include <endian.h>

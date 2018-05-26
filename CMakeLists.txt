@@ -1,4 +1,4 @@
-project(nheqminer)
+project(zhasher)
 cmake_minimum_required(VERSION 3.5)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11") #  -Wall
@@ -48,7 +48,7 @@ if(CMAKE_COMPILER_IS_GNUCXX)
 endif()
 
 # Common
-include_directories(${nheqminer_SOURCE_DIR}/nheqminer)
+include_directories(${zhasher_SOURCE_DIR}/zhasher)
 
 # BOOST
 #find_package(Threads REQUIRED COMPONENTS)
@@ -82,61 +82,61 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR}/../)
 
 set(SOURCE_FILES
     # sources
-    nheqminer/amount.cpp
-    nheqminer/api.cpp
-    nheqminer/arith_uint256.cpp
-    nheqminer/crypto/sha256.cpp
-    nheqminer/json/json_spirit_reader.cpp
-    nheqminer/json/json_spirit_value.cpp
-    nheqminer/json/json_spirit_writer.cpp
-    nheqminer/libstratum/ZcashStratum.cpp
-    nheqminer/main.cpp
-    nheqminer/primitives/block.cpp
-    nheqminer/speed.cpp
-    nheqminer/uint256.cpp
-    nheqminer/utilstrencodings.cpp
+    zhasher/amount.cpp
+    zhasher/api.cpp
+    zhasher/arith_uint256.cpp
+    zhasher/crypto/sha256.cpp
+    zhasher/json/json_spirit_reader.cpp
+    zhasher/json/json_spirit_value.cpp
+    zhasher/json/json_spirit_writer.cpp
+    zhasher/libstratum/ZcashStratum.cpp
+    zhasher/main.cpp
+    zhasher/primitives/block.cpp
+    zhasher/speed.cpp
+    zhasher/uint256.cpp
+    zhasher/utilstrencodings.cpp
     # headers
-    nheqminer/amount.h
-    nheqminer/api.hpp
-    nheqminer/arith_uint256.h
-    nheqminer/crypto/sha256.h
-    nheqminer/hash.h
-    nheqminer/json/json_spirit.h
-    nheqminer/json/json_spirit_error_position.h
-    nheqminer/json/json_spirit_reader.h
-    nheqminer/json/json_spirit_reader_template.h
-    nheqminer/json/json_spirit_stream_reader.h
-    nheqminer/json/json_spirit_utils.h
-    nheqminer/json/json_spirit_value.h
-    nheqminer/json/json_spirit_writer.h
-    nheqminer/json/json_spirit_writer_template.h
-    nheqminer/libstratum/StratumClient.cpp
-    nheqminer/libstratum/StratumClient.h
-    nheqminer/libstratum/ZcashStratum.cpp
-    nheqminer/libstratum/ZcashStratum.h
-    nheqminer/primitives/block.h
-    nheqminer/primitives/transaction.h
-    nheqminer/script/script.h
-    nheqminer/serialize.h
-    nheqminer/speed.hpp
-    nheqminer/streams.h
-    nheqminer/support/allocators/zeroafterfree.h
-    nheqminer/tinyformat.h
-    nheqminer/uint252.h
-    nheqminer/uint256.h
-    nheqminer/utilstrencodings.h
-    nheqminer/version.h
-    nheqminer/zcash/JoinSplit.hpp
-    nheqminer/zcash/NoteEncryption.hpp
-    nheqminer/zcash/Proof.hpp
-    nheqminer/zcash/Zcash.h
-    nheqminer/SolverStub.h # just a stub
+    zhasher/amount.h
+    zhasher/api.hpp
+    zhasher/arith_uint256.h
+    zhasher/crypto/sha256.h
+    zhasher/hash.h
+    zhasher/json/json_spirit.h
+    zhasher/json/json_spirit_error_position.h
+    zhasher/json/json_spirit_reader.h
+    zhasher/json/json_spirit_reader_template.h
+    zhasher/json/json_spirit_stream_reader.h
+    zhasher/json/json_spirit_utils.h
+    zhasher/json/json_spirit_value.h
+    zhasher/json/json_spirit_writer.h
+    zhasher/json/json_spirit_writer_template.h
+    zhasher/libstratum/StratumClient.cpp
+    zhasher/libstratum/StratumClient.h
+    zhasher/libstratum/ZcashStratum.cpp
+    zhasher/libstratum/ZcashStratum.h
+    zhasher/primitives/block.h
+    zhasher/primitives/transaction.h
+    zhasher/script/script.h
+    zhasher/serialize.h
+    zhasher/speed.hpp
+    zhasher/streams.h
+    zhasher/support/allocators/zeroafterfree.h
+    zhasher/tinyformat.h
+    zhasher/uint252.h
+    zhasher/uint256.h
+    zhasher/utilstrencodings.h
+    zhasher/version.h
+    zhasher/zcash/JoinSplit.hpp
+    zhasher/zcash/NoteEncryption.hpp
+    zhasher/zcash/Proof.hpp
+    zhasher/zcash/Zcash.h
+    zhasher/SolverStub.h # just a stub
 
-    nheqminer/AvailableSolvers.h
-    nheqminer/ISolver.h
-    nheqminer/Solver.h
-    nheqminer/MinerFactory.h
-    nheqminer/MinerFactory.cpp
+    zhasher/AvailableSolvers.h
+    zhasher/ISolver.h
+    zhasher/Solver.h
+    zhasher/MinerFactory.h
+    zhasher/MinerFactory.cpp
 
     # make same path on windows
     #blake shared
@@ -184,9 +184,9 @@ if (USE_CPU_TROMP)
 endif()
 if (USE_CPU_XENONCAT)
     add_library ( xenoncat_avx1 SHARED IMPORTED GLOBAL )
-    set_target_properties ( xenoncat_avx1 PROPERTIES IMPORTED_LOCATION "../nheqminer/cpu_xenoncat/asm_linux/equihash_avx1.o" )
+    set_target_properties ( xenoncat_avx1 PROPERTIES IMPORTED_LOCATION "../zhasher/cpu_xenoncat/asm_linux/equihash_avx1.o" )
     add_library ( xenoncat_avx2 SHARED IMPORTED GLOBAL )
-    set_target_properties ( xenoncat_avx2 PROPERTIES IMPORTED_LOCATION "../nheqminer/cpu_xenoncat/asm_linux/equihash_avx2.o" )
+    set_target_properties ( xenoncat_avx2 PROPERTIES IMPORTED_LOCATION "../zhasher/cpu_xenoncat/asm_linux/equihash_avx2.o" )
     target_link_libraries(${PROJECT_NAME} cpu_xenoncat xenoncat_avx1 xenoncat_avx2)
 endif()
 if (USE_CUDA_TROMP)
