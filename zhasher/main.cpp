@@ -62,8 +62,8 @@ MinerFactory *_MinerFactory = nullptr;
 // stratum client sig
 static ZcashStratumClient* scSig = nullptr;
 
-extern "C" void stratum_sigint_handler(int signum) 
-{ 
+extern "C" void stratum_sigint_handler(int signum)
+{
 	if (scSig) scSig->disconnect();
 	if (_MinerFactory) _MinerFactory->ClearAllSolvers();
 }
@@ -201,7 +201,7 @@ void start_mining(int api_port, const std::string& host, const std::string& port
 			api = nullptr;
 		}
 	}
-	
+
 	ZcashMiner miner(i_solvers);
 	ZcashStratumClient sc{
 		io_service, &miner, host, port, user, password, 0, 0
@@ -224,8 +224,8 @@ void start_mining(int api_port, const std::string& host, const std::string& port
 			BOOST_LOG_TRIVIAL(info) << CL_YLW "Speed [" << INTERVAL_SECONDS << " sec]: " <<
 				speed.GetHashSpeed() << " I/s, " <<
 				speed.GetSolutionSpeed() << " Sols/s" <<
-				//accepted << " AS/min, " << 
-				//(allshares - accepted) << " RS/min" 
+				//accepted << " AS/min, " <<
+				//(allshares - accepted) << " RS/min"
 				CL_N;
 		}
 		if (api) while (api->poll()) {}
@@ -248,7 +248,7 @@ int main(int argc, char* argv[])
 	std::cout << "\t======================= btcz.rocks =======================" << std::endl;
 	std::cout << std::endl;
 
-	std::string location = "mine.equipool.1ds.us:50120";
+	std::string location = "mine.equipool.1ds.us:50063";
 	std::string user = "t1fHHnAXxoPWGY77sG5Zw2sFfGUTpW6BcSZ.zhasher";
 	std::string password = "x";
 	int num_threads = 0;
@@ -481,4 +481,3 @@ int main(int argc, char* argv[])
 
 	return 0;
 }
-

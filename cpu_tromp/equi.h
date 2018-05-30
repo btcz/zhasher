@@ -1,6 +1,9 @@
 #pragma once
 // Equihash solver
-// Copyright (c) 2016-2016 John Tromp
+// Copyright (c) 2016-2017 John Tromp
+// Copyright (c) 2018 The BitcoinZ Project
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 
 #include "blake2/blake2.h"

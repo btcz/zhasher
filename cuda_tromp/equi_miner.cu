@@ -1,5 +1,8 @@
 // Equihash CUDA solver
 // Copyright (c) 2016 John Tromp
+// Copyright (c) 2018 The BitcoinZ Project
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #define htole32(x) (x)
 #define HAVE_DECL_HTOLE32 1
@@ -222,28 +225,28 @@ struct equi {
   __device__ bool listindices2(const tree t, u32 *indices) {
     const bucket1 &buck = hta.trees1[0][t.bucketid()];
     const u32 size = 1 << 1;
-    return listindices1(buck[t.slotid0()].attr, indices) || 
+    return listindices1(buck[t.slotid0()].attr, indices) ||
            listindices1(buck[t.slotid1()].attr, indices+size) ||
            orderindices(indices, size) || indices[0] == indices[size];
   }
   __device__ bool listindices3(const tree t, u32 *indices) {
     const bucket0 &buck = hta.trees0[1][t.bucketid()];
     const u32 size = 1 << 2;
-    return listindices2(buck[t.slotid0()].attr, indices) || 
+    return listindices2(buck[t.slotid0()].attr, indices) ||
            listindices2(buck[t.slotid1()].attr, indices+size) ||
            orderindices(indices, size) || indices[0] == indices[size];
   }
   __device__ bool listindices4(const tree t, u32 *indices) {
     const bucket1 &buck = hta.trees1[1][t.bucketid()];
     const u32 size = 1 << 3;
-    return listindices3(buck[t.slotid0()].attr, indices) || 
+    return listindices3(buck[t.slotid0()].attr, indices) ||
            listindices3(buck[t.slotid1()].attr, indices+size) ||
            orderindices(indices, size) || indices[0] == indices[size];
   }
   __device__ bool listindices5(const tree t, u32 *indices) {
     const bucket0 &buck = hta.trees0[2][t.bucketid()];
     const u32 size = 1 << 4;
-    return listindices4(buck[t.slotid0()].attr, indices) || 
+    return listindices4(buck[t.slotid0()].attr, indices) ||
            listindices4(buck[t.slotid1()].attr, indices+size) ||
            orderindices(indices, size) || indices[0] == indices[size];
   }
@@ -252,28 +255,28 @@ struct equi {
   __device__ bool listindices6(const tree t, u32 *indices) {
     const bucket1 &buck = hta.trees1[2][t.bucketid()];
     const u32 size = 1 << 5;
-    return listindices5(buck[t.slotid0()].attr, indices) || 
+    return listindices5(buck[t.slotid0()].attr, indices) ||
            listindices5(buck[t.slotid1()].attr, indices+size) ||
            orderindices(indices, size) || indices[0] == indices[size];
   }
   __device__ bool listindices7(const tree t, u32 *indices) {
     const bucket0 &buck = hta.trees0[3][t.bucketid()];
     const u32 size = 1 << 6;
-    return listindices6(buck[t.slotid0()].attr, indices) || 
+    return listindices6(buck[t.slotid0()].attr, indices) ||
            listindices6(buck[t.slotid1()].attr, indices+size) ||
            orderindices(indices, size) || indices[0] == indices[size];
   }
   __device__ bool listindices8(const tree t, u32 *indices) {
     const bucket1 &buck = hta.trees1[3][t.bucketid()];
     const u32 size = 1 << 7;
-    return listindices7(buck[t.slotid0()].attr, indices) || 
+    return listindices7(buck[t.slotid0()].attr, indices) ||
            listindices7(buck[t.slotid1()].attr, indices+size) ||
            orderindices(indices, size) || indices[0] == indices[size];
   }
   __device__ bool listindices9(const tree t, u32 *indices) {
     const bucket0 &buck = hta.trees0[4][t.bucketid()];
     const u32 size = 1 << 8;
-    return listindices8(buck[t.slotid0()].attr, indices) || 
+    return listindices8(buck[t.slotid0()].attr, indices) ||
            listindices8(buck[t.slotid1()].attr, indices+size) ||
            orderindices(indices, size) || indices[0] == indices[size];
   }
