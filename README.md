@@ -1,6 +1,18 @@
 # Zhasher
 Zhasher is a Zhash CPU&GPU Miner for BitcoinZ based on nheqminer made by NiceHash.
 
+# !OBSOLETE! Please use EWBF's miner as it has a 10x improvement over Zhasher! 
+
+More information here:
+https://bitcointalk.org/index.php?topic=4466962.0
+
+Example EWBF Config:
+```
+miner.exe --algo 144_5 --server mine-btcz-na.equipool.1ds.us --user tmWNpX6y9x4xFxg4NDkkajsVB4CxKx9sAgb.renuzit --pass x --port 49951 --pers BitcoinZ
+```
+
+# !OBSOLETE!  Please use EWBF's miner as it has a 10x improvement over Zhasher!
+
 ## About Zhash PoW
 The Zhash PoW is based on the Equihash 144,5 algorithm, a memory hard algorithm
 solving the Generalized Birthday Problem with custom parameters unique to BitcoinZ.
